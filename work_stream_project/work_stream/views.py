@@ -1,17 +1,16 @@
 from django.shortcuts import render
+from work_stream.models import Project
 
 
 def projects(request):
-    projects_list = [{'id': 1,
-                     'title': 'Онлайн кинотеатр',
-                     'description': 'Кинотеатр с самой '
-                                    'полной бибилиотекой фильмов.'},
-                     {'id': 2,
-                     'title': 'Платформа с ИТ-курсами',
-                     'description': 'Курсы по фронтенду, бэкэнду и мобилке.'},]
+    projects = Project.objects.all()
+    context = {'projects': projects}
 
-    return render(request, 'projects/projects.html', {'projects':projects_list})
+    return render(request, 'projects/projects.html', context)
 
 
-def project(request):
-    return render(request, 'projects/single-project.html')
+def project(request, pk):
+    project_obj = Project.objects.get(id=pk)
+    tags = project_obj.tags.all()
+    context = {'project': project_obj}
+    return render(request, 'projects/single-project.html', context)
