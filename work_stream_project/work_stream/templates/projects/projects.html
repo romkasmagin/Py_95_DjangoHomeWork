@@ -5,11 +5,15 @@
     <title>Шаблон для вывода проектов</title>
 </head>
 <body>
+<strong><a href="{% url 'create-project' %}">Добавить проект</a></strong>
 <h2>Здесь будут все проекты</h2>
 {% for project in projects %}
 <p>Номер проекта: # {{ project.id }}</p>
 <h3>Название проекта: <a href="{% url 'project' project.id %}">{{ project.title }}</a></h3>
 <em>{{ project.description }}</em>
+<h4><a href="{% url 'update-project' project.id %}">Редактировать проект</a></h4>
+<h4><a href="{% url 'delete-project' project.id %}">Удалить проект</a></h4>
+<hr>
 {% endfor %}
 </body>
 </html>
