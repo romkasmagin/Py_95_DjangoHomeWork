@@ -10,8 +10,8 @@ def projects(request):
     return render(request, 'projects/projects.html', context)
 
 
-def project(request, pk):
-    project_obj = Project.objects.get(id=pk)
+def project(request, project_slug):
+    project_obj = Project.objects.get(slug=project_slug)
     tags = project_obj.tags.all()
     context = {'project': project_obj}
     return render(request, 'projects/single-project.html', context)

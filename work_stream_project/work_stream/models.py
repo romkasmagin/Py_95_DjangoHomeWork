@@ -25,6 +25,9 @@ class Project(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True,
                           primary_key=True, editable=False)
+    image = models.ImageField(null=True, blank=True,
+                              default="project_images/default.jpg",
+                              upload_to='project_images')
 
     def __str__(self):
         return self.title
