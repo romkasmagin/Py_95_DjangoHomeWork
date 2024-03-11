@@ -13,4 +13,8 @@ urlpatterns = [
     path('update-project/<str:pk>/',
          views.update_project,
          name="update-project"),
+
+    path('tag/<slug:tag_slug>/',
+         views.projects_by_tag,
+         name="tag"),
 ]
