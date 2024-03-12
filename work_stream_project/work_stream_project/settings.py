@@ -31,7 +31,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'work_stream'
+    'work_stream.apps.WorkStreamConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
