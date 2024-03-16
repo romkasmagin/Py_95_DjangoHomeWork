@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from work_stream.models import Project, Tag
-from work_stream.forms import ProjectForm
+from work_stream.forms import ProjectForm, ReviewForm
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 def projects(request):
@@ -11,10 +13,20 @@ def projects(request):
 
 
 def project(request, project_slug):
-    project_obj = Project.objects.get(slug=project_slug)
-    tags = project_obj.tags.all()
-    context = {'project': project_obj}
-    return render(request, 'projects/single-project.html', context)
+   project = Project.objects.get(slug=project_slug)
+   tags = project.tags.all()
+   form = ReviewForm()
+   if request.method == 'POST':
+       form = ReviewForm(request.POST)
+       review = form.save(commit=False)
+       review.project = project
+       review.owner = request.user.profile
+       review.save()
+       project.getVoteCount
+       messages.success(request, 'Ваш отзыв был добавлен!')
+       return redirect('project', project_slug=project.slug)
+   return render(request, 'projects/single-project.html', {'project': project, 'form': form})
+
 
 
 def create_project(request):
