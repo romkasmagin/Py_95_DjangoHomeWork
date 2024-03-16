@@ -28,7 +28,7 @@
                 {% for project in projects %}
                 <div class="column">
                     <div class="card project">
-                        <a href="{% url 'project' project.slug %}" class="project">
+                        <a href="{% url 'project' project.id %}" class="project">
                             <img class="project__thumbnail" src="{{ project.image.url }}" alt="скриншот проекта" />
                             <div class="card__body">
                                 <h3 class="project__title">{{ project.title }}</h3>

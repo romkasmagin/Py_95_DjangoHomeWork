@@ -12,8 +12,8 @@ def projects(request):
     return render(request, 'projects/projects.html', context)
 
 
-def project(request, project_slug):
-   project = Project.objects.get(slug=project_slug)
+def project(request, project_id):
+   project = Project.objects.get(id=project_id)
    tags = project.tags.all()
    form = ReviewForm()
    if request.method == 'POST':
@@ -28,19 +28,26 @@ def project(request, project_slug):
    return render(request, 'projects/single-project.html', {'project': project, 'form': form})
 
 
-
+@login_required(login_url="login")
 def create_project(request):
+    profile = request.user.profile
     form = ProjectForm()
-    if request.method == 'POST':
-        form = ProjectForm(request.POST, request.FILES)
 
+    if request.method == 'POST':
+        newtags = request.POST.get('newtags').replace(',',  " ").split()
+        form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('projects')
+            project = form.save(commit=False)
+            project.owner = profile
+            project.save()
+
+            for tag in newtags:
+                tag, created = Tag.objects.get_or_create(name=tag)
+                project.tags.add(tag)
+            return redirect('account')
 
     context = {'form': form}
-
-    return render(request, 'projects/project_form.html', context)
+    return render(request, "projects/project_form.html", context)
 
 
 def update_project(request, project_slug):
