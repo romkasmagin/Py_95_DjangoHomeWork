@@ -186,9 +186,11 @@ def inbox(request):
 def view_message(request, pk):
     profile = request.user.profile
     message = profile.messages.get(id=pk)
+
     if message.is_read == False:
         message.is_read = True
         message.save()
+
     context = {'message': message}
     return render(request, 'users/message.html', context)
 
@@ -219,5 +221,3 @@ def create_message(request, username):
 
     context = {'recipient': recipient, 'form': form}
     return render(request, 'users/message_form.html', context)
-
-

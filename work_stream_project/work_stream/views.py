@@ -50,8 +50,8 @@ def create_project(request):
     return render(request, "projects/project_form.html", context)
 
 
-def update_project(request, project_slug):
-    project = Project.objects.get(slug=project_slug)
+def update_project(request, project_id):
+    project = Project.objects.get(id=project_id)
     form = ProjectForm(instance=project)
     if request.method == 'POST':
         form = ProjectForm(request.POST, request.FILES, instance=project)
@@ -62,8 +62,8 @@ def update_project(request, project_slug):
     return render(request, 'projects/project_form.html', context)
 
 
-def delete_project(request, project_slug):
-    project = Project.objects.get(slug=project_slug)
+def delete_project(request, project_id):
+    project = Project.objects.get(id=project_id)
 
     if request.method == 'POST':
         project.delete()
