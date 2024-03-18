@@ -8,10 +8,12 @@ class ProjectForm(ModelForm):
         model = Project
         fields = ['title',
                   'slug',
+                  'image',
                   'tags',
                   'description',
                   'demo_link',
-                  'source_link']
+                  'source_link'
+                  ]
 
         labels = {
             'title': 'Название проекта',

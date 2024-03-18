@@ -70,11 +70,11 @@ def profiles(request):
     profiles_obj = Profile.objects.all()
     context = {'profiles': profiles_obj}
 
-    return render(request, 'users/profiles.html')
+    return render(request, 'users/profiles.html', context)
 
 
-def user_profile(request, username):
-    profile = Profile.objects.get(username=username)
+def user_profile(request, user_id):
+    profile = Profile.objects.get(id=user_id)
     main_skills = profile.skills.all()[:2]
     extra_skills = profile.skills.all()[2:]
     context = {
