@@ -217,7 +217,7 @@ def create_message(request, username):
             message.save()
 
             messages.success(request, 'Your message was successfully sent!')
-            return redirect('user-profile', username=recipient.username)
+            return redirect('user-profile', user_id=recipient.id)
 
     context = {'recipient': recipient, 'form': form}
     return render(request, 'users/message_form.html', context)

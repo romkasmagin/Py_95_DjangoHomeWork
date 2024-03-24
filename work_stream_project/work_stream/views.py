@@ -16,15 +16,18 @@ def project(request, project_id):
    project = Project.objects.get(id=project_id)
    tags = project.tags.all()
    form = ReviewForm()
+   project.get_vote_count()
+
    if request.method == 'POST':
        form = ReviewForm(request.POST)
        review = form.save(commit=False)
        review.project = project
        review.owner = request.user.profile
        review.save()
-       project.getVoteCount
+       project.get_vote_count()
+       print(project.total_votes, project.votes_ratio)
        messages.success(request, 'Ваш отзыв был добавлен!')
-       return redirect('project', project_slug=project.slug)
+       return redirect('project', project_id=project.id)
    return render(request, 'projects/single-project.html', {'project': project, 'form': form})
 
 
