@@ -53,6 +53,7 @@ def create_project(request):
     return render(request, "projects/project_form.html", context)
 
 
+@login_required(login_url="login")
 def update_project(request, project_id):
     project = Project.objects.get(id=project_id)
     form = ProjectForm(instance=project)
@@ -65,6 +66,7 @@ def update_project(request, project_id):
     return render(request, 'projects/project_form.html', context)
 
 
+@login_required(login_url="login")
 def delete_project(request, project_id):
     project = Project.objects.get(id=project_id)
 

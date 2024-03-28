@@ -6,7 +6,10 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.urls import conf
 from users.models import Profile, Skill
-from users.forms import CustomUserCreationForm, ProfileForm, SkillForm, MessageForm
+from users.forms import (CustomUserCreationForm,
+                         ProfileForm,
+                         SkillForm,
+                         MessageForm)
 
 
 def login_user(request):
@@ -187,7 +190,7 @@ def view_message(request, pk):
     profile = request.user.profile
     message = profile.messages.get(id=pk)
 
-    if message.is_read == False:
+    if not message.is_read:
         message.is_read = True
         message.save()
 

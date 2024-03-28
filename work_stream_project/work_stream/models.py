@@ -52,7 +52,11 @@ class Project(models.Model):
         up_votes = reviews.filter(value='up').count()
         total_votes = reviews.count()
 
-        ratio = (up_votes / total_votes) * 100
+        if up_votes:
+            ratio = (up_votes / total_votes) * 100
+        else:
+            ratio = 0
+
         self.total_votes = total_votes
         self.votes_ratio = ratio
         print(self.total_votes, self.votes_ratio)
