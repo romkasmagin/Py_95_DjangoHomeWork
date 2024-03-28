@@ -70,7 +70,7 @@
               </p>
             </td>
             <td class="settings__tableActions">
-              <a class="tag tag--pill tag--main settings__btn" href="{% url 'update-skill' skill.slug %}"><i
+              <a class="tag tag--pill tag--main settings__btn" href="{% url 'update-skill' skill_id=skill.id %}"><i
                   class="im im-edit"></i> Изменить</a>
               <a class="tag tag--pill tag--main settings__btn" href="{% url 'delete-skill' skill.slug %}"><i
                   class="im im-x-mark-circle-o"></i>

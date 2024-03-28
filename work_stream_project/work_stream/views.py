@@ -5,14 +5,14 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 
-def projects(request):
+def get_all_projects(request):
     projects = Project.objects.all()
     context = {'projects': projects}
 
     return render(request, 'projects/projects.html', context)
 
 
-def project(request, project_id):
+def get_project(request, project_id):
    project = Project.objects.get(id=project_id)
    tags = project.tags.all()
    form = ReviewForm()

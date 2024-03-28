@@ -147,9 +147,9 @@ def create_skill(request):
 
 
 @login_required(login_url='login')
-def update_skill(request, skill_slug):
+def update_skill(request, skill_id):
     profile = request.user.profile
-    skill = profile.skills.get(slug=skill_slug)
+    skill = profile.skills.get(id=skill_id)
     form = SkillForm(instance=skill)
 
     if request.method == 'POST':
